@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+{% if entries|length == 0 %}
+    <p>No entries :'(</p>
+    {% else %}
+
+            {% for entry in entries %}
+            <div id="{{entry.id}}">
+            <h2>{{entry.title}}</h2>
+                {{entry.entry}}>
+            </div>
+    
+            {% endfor %}
+
+    {% endif %}
+{% endblock %}

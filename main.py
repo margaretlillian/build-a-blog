@@ -5,7 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://get-it-done:beproductive@localhost:8889/get-it-done'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:garbage@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 app.secret_key = 'VF%^ghyjGRSfs4545&^FGS^5$%'
@@ -29,9 +29,24 @@ def index():
     return "No snoop plz"
 
 
-@app.route('/blog', methods=['POST'])
+@app.route('/blog')
 def blog():
-    return render_template('entries.html')
+    entries = Blog.query.all()
+    return render_template('entries.html', entries=entries)
+
+@app.route('/newpost')
+def newpostcreation():
+        return render_template('new-entry.html')
+@app.route('/newpost', methods=['GET', 'POST'])
+def newpost():
+    if request.method == 'POST':
+        entry_title = request.form['title']
+        entry_post = request.form['entry']
+        new_entry = Blog(entry_title, entry_post, None)
+        db.session.add(new_entry)
+        db.session.commit()
+    return redirect('/blog')
+
 
 
 
