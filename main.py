@@ -39,22 +39,22 @@ def blog():
     if not post_id:
         return render_template('entries.html', entries=entries)
     else:
-        return render_template('entry.html', entry=entry)
-
-@app.route('/newpost')
-def newpostnotyetcreated():
-        return render_template('new-entry.html')
+        return render_template('entry.html', entry=entry)        
 
 @app.route('/newpost', methods=['GET', 'POST'])
 def newpost():
     if request.method == 'POST':
         entry_title = request.form['title']
         entry_post = request.form['entry']
+        if entry_post == "" or entry_title == "":
+            flash('Please do not leave any fields blank')
+            return render_template('new-entry.html', title=entry_title, post=entry_post)
         new_entry = Blog(entry_title, entry_post, None)
         db.session.add(new_entry)
         db.session.commit()
-    new_post = Blog.query.get(new_entry.id)
-    return redirect('/blog?id={0}'.format(new_post))
+        new_post = Blog.query.get(new_entry.id)
+        return redirect('/blog?id={0}'.format(new_post))
+    return render_template('new-entry.html')
 
 
 if __name__ == '__main__':
