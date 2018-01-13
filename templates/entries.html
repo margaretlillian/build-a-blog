@@ -6,8 +6,8 @@
 
             {% for entry in entries %}
             <div id="{{entry.id}}">
-            <h2>{{entry.title}}</h2>
-                {{entry.entry}}>
+            <a href="/blog?id={{entry.id}}"><h2>{{entry.title}}</h2></a>
+                {{entry.entry}}
             </div>
     
             {% endfor %}

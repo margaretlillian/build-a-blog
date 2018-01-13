@@ -1,7 +1,6 @@
+from datetime import datetime
 from flask import Flask, request, redirect, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -24,6 +23,9 @@ class Blog(db.Model):
             date = datetime.utcnow()
         self.date = date
 
+    def __repr__(self):
+        return str(self.id)
+
 @app.route('/')
 def index():
     return "No snoop plz"
@@ -32,11 +34,17 @@ def index():
 @app.route('/blog')
 def blog():
     entries = Blog.query.all()
-    return render_template('entries.html', entries=entries)
+    post_id = request.args.get('id')
+    entry = Blog.query.filter_by(id=post_id).first()
+    if not post_id:
+        return render_template('entries.html', entries=entries)
+    else:
+        return render_template('entry.html', entry=entry)
 
 @app.route('/newpost')
-def newpostcreation():
+def newpostnotyetcreated():
         return render_template('new-entry.html')
+
 @app.route('/newpost', methods=['GET', 'POST'])
 def newpost():
     if request.method == 'POST':
@@ -45,11 +53,8 @@ def newpost():
         new_entry = Blog(entry_title, entry_post, None)
         db.session.add(new_entry)
         db.session.commit()
-    return redirect('/blog')
-
-
-
-
+    new_post = Blog.query.get(new_entry.id)
+    return redirect('/blog?id={0}'.format(new_post))
 
 
 if __name__ == '__main__':
