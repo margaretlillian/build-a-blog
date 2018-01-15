@@ -43,12 +43,12 @@ def index():
 
 @app.route('/blog')
 def blog():
-    entries = Post.query.all()
+    entries = Post.query.order_by(Post.date.desc()).all()
     post_id = request.args.get('id')
     entry = Post.query.filter_by(entry_id=post_id).first()
-    category = Post.query.join(Post.category_id).first()
+    #category = Post.query.join(Post.category_id).first()
     if not post_id:
-        return render_template('entries.html', entries=entries, category=category)
+        return render_template('entries.html', entries=entries)
     else:
         return render_template('entry.html', entry=entry)        
 

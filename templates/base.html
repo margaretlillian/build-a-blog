@@ -4,11 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css.css')}}">
-    <title>$TITLE</title>
+    <title>My Coding Journey {% block title %}{% endblock %}</title>
 </head>
 <body>
-    <a href="/blog">All entries</a> &dot; <a href="/newpost">Create New Entry</a>
-    <h1>$TITLE</h1>
+  
+    <div id="main">
+    
+    <h1><a href="/blog">Code Journey</a></h1>
+    <section id="sidebar">
+      <h2 id="side">Sidebar</h2>
+
+        <section class="bar" id="about">
+             <h3>About</h3>
+                <p>I am currently attempting to contribute to the tech version of Florida's Python invasion. Wish me luck!</p>
+         </section>   
+
+        <section class="bar" id="nav"> 
+          <h3>Navigation</h3>
+          <ul>
+            <li><a href="/blog">All entries</a> </li>
+            <li> <a href="/newpost">Create New Entry</a></li>
+          </ul>
+        </section>
+
+      </section>
+        <section id="content">
     {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>
@@ -20,6 +40,7 @@
 {% endwith %}
     {% block content %}
     {% endblock %}
-    
+        </section>
+  </div>
 </body>
 </html>

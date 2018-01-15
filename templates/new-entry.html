@@ -1,5 +1,8 @@
 {% extends "base.html" %}
+{% block title %} &Rang; Create New Entry {% endblock %}
 {% block content %}
+<section class="blogpost">
+<h2>Add New Entry</h2>
 <form method="POST">
     <label><input type="text" name="title" value="{{title}}" placeholder="Entry Title"> </label>
 
@@ -20,4 +23,5 @@
     <textarea name="entry" placeholder="Entry content">{{entry}}</textarea></label>
     <input type="submit" value="submit">
 </form>
+</section>
 {% endblock %}

@@ -1,13 +1,122 @@
 body {
-    background: #fff;
-    color: #555;
-    font: 1.25em arial, sans-serif;
+    background: #ddd;
+    color: #7b7b7b;
+    font: 1.1em sans-serif;
+    line-height: 1.75em;
 }
 
-a {
-    color: #51455b;
-    text-decoration: underline;
+a, h2.a {
+    color: #f03f37;
+    text-decoration: none;
 }
+
+a, h2 { border-bottom: 1px solid #19133f;}
+
 label {
     display: block;
+}
+
+h1 {
+    font: bold 3em monospace;
+}
+
+h2 {
+    font: bold 2.5em monospace;
+    color: #19133f;
+    margin: 2px;
+}
+
+h3 {
+    font: bold 1.75em monospace;
+    margin: 2px;
+    color: #9c9432;
+}
+
+h2, h3 {
+    padding: 0;
+}
+input, textarea, select {
+    font: 1.3em sans-serif;
+    border: 2px solid #191338;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 8px;
+    color: #005c8a;
+    background: #f8f8f8;
+}
+
+textarea {
+    width: 80%;
+    height: 300px;
+}
+
+.blogpost {
+}
+
+#main {width: 80%;
+margin: 0 auto;}
+
+#side {
+    display: none;
+}
+
+.bar, .blogpost {
+    border: 5px solid #6c6470;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+}
+
+.date {
+    font-size: 1em;
+    color: #9fcbb4;
+    margin-left: 30px;
+}
+
+#sidebar {
+    width: 23%;
+    float: left;
+    background: url('robo.png') no-repeat -10px 0;
+    padding-top: 300px;
+}
+#content {
+    width: 75%;
+    float: right;
+}
+
+@media only screen and (max-width: 700px) {
+#sidebar, #content {
+    float: none;
+    width: 100%;
+}
+h1 {font-size: 2em;}
+
+#sidebar {padding-top: 150px;}
+#main {width: 100%;}
+#about {
+    border: none;
+    background: #fff;
+    opacity: 0.5;
+    /*background: transparent;*/
+    color: #000;
+    border-radius: 10px;
+    font-size: 0.8em;
+    padding: 2px;
+}
+
+#nav {background: transparent;
+border: none;
+padding:0;
+font-size: 2em;}
+
+#nav li {margin: 10px;
+list-style: none;}
+
+.bar h3{
+    display: none;
+}
+.bar, .blogpost {
+    margin: 10px 0;
+}
 }

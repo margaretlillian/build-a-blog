@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-            <section id="{{entry.id}}">
-            <a href="/blog?id={{entry.id}}"><h2>{{entry.title}}</h2></a>
+            <section id="{{entry.entry_id}}" class="blogpost">
+            <h2>{{entry.title}}</h2>
+            <h3 class="date">Posted on {{entry.date}}</h3>
                 {{entry.entry}}
             </section>
 
