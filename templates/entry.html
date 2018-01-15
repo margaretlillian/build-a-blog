@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-            <div id="{{entry.id}}">
+            <section id="{{entry.id}}">
             <a href="/blog?id={{entry.id}}"><h2>{{entry.title}}</h2></a>
                 {{entry.entry}}
-            </div>
+            </section>
+
 {% endblock %}
