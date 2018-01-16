@@ -4,6 +4,13 @@
 <section class="blogpost">
 <h2>Add New Entry</h2>
 <form method="POST">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p class="error">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
     <label><input type="text" name="title" value="{{title}}" placeholder="Entry Title"> </label>
 
     <label><input type="text" name="category-new" value="{{category}}" placeholder="Category"> 

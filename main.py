@@ -1,3 +1,12 @@
+#FEATURES NEEDED:
+# 1. The ability to delete posts
+# 2. The ability to edit posts
+# 3. Try to incorporate some kind of WYSIWYG thing
+# 4. Category list.
+# 5. Better date formatting :)
+
+# ?????? COMMENTS? Too much? 
+
 from datetime import datetime
 from flask import Flask, request, redirect, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
@@ -43,10 +52,9 @@ def index():
 
 @app.route('/blog')
 def blog():
-    entries = Post.query.order_by(Post.date.desc()).all()
+    entries = Post.query.join(Category).order_by(Post.date.desc()).all()
     post_id = request.args.get('id')
     entry = Post.query.filter_by(entry_id=post_id).first()
-    #category = Post.query.join(Post.category_id).first()
     if not post_id:
         return render_template('entries.html', entries=entries)
     else:
@@ -63,7 +71,7 @@ def newpost():
             category = category_exst
         else:
             if category_exst != "":
-                flash("Please don't do that")
+                flash("Only one category per entry, sorry.")
                 return render_template('new-entry.html', title=entry_title, post=entry_post, categories=retrieve_categories())
         if entry_post == "" or entry_title == "" or category == "":
             flash('Please do not leave any fields blank')
@@ -82,10 +90,16 @@ def newpost():
         db.session.commit()
         new_post = Post.query.get(new_entry.entry_id)
 
-        
-
         return redirect('/blog?id={0}'.format(new_post))
     return render_template('new-entry.html', categories=retrieve_categories())
+
+@app.route('/category')
+def category():
+    cat_id = request.args.get('id')
+    print("CATEGORY ID:", cat_id)
+    categories = Post.query.filter_by(category_id=cat_id).all()
+    print("what", categories)
+    return render_template('entries.html', entries=categories)    
 
 def retrieve_categories():
     categories = []

@@ -2,13 +2,16 @@
 
 {% block content %}
 {% if entries|length == 0 %}
+<article class="blogpost">
+    <h2>Well this is sad...</h2>
     <p>No entries :'(</p>
+</article>
     {% else %}
 
             {% for entry in entries %}
             <article class="blogpost" id="{{entry.entry_id}}">
             <a href="/blog?id={{entry.entry_id}}"><h2 class="a">{{entry.title}}</h2></a>
-            <h3 class="date">Posted on {{entry.date}}</h3>
+            <h3 class="date">Posted on {{entry.date}} in <a href="/category?id={{entry.category_id}}">{{entry.category.name}}</a> </h3>
                 {{entry.entry}}
                 
             </article>
